@@ -64,3 +64,5 @@ def create_projects_page():
 #             if i + idx < len(app_cards):
 #                 with col:
 #                     st.markdown(app_cards[i + idx], unsafe_allow_html=True)
+
+# quality-insight-dashboard

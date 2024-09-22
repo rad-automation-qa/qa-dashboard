@@ -7,10 +7,6 @@ from _app._pages.system_tools import create_system_page
 from _app.data import rad_logo
 
 
-def get_port():
-    return os.getenv('STREAMLIT_SERVER_PORT', '8501')
-
-
 def set_title(title):
     st.markdown(
         f"""
@@ -25,6 +21,7 @@ def set_title(title):
 if __name__ == "__main__":
     st.set_page_config(layout="wide",
                        page_icon=rad_logo)
+
     st.sidebar.image(rad_logo, use_column_width=True)
     st.sidebar.title("Navigation")
     page = st.sidebar.radio(
