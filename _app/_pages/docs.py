@@ -2,20 +2,23 @@ import streamlit as st
 import base64
 import os
 
-from constants import SOURCE_DOCUMNETS_FOLDER
-
 
 def create_docs_page():
     pdf_files = []
 
+    BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    DESTINATION_DOCUMNETS_FOLDER = os.path.join(
+        BASE_DIR, 'static', 'docs')
+
     # Check if the directory exists before trying to list files
-    if os.path.exists(SOURCE_DOCUMNETS_FOLDER):
+    if os.path.exists(DESTINATION_DOCUMNETS_FOLDER):
         # Get a list of all PDF files in the folder
         pdf_files = [f for f in os.listdir(
-            SOURCE_DOCUMNETS_FOLDER) if f.endswith('.pdf')]
+            DESTINATION_DOCUMNETS_FOLDER) if f.endswith('.pdf')]
         print(f"PDF files found: {pdf_files}")
     else:
-        print(f"Error: Folder {SOURCE_DOCUMNETS_FOLDER} does not exist.")
+        print(f"Error: Folder {DESTINATION_DOCUMNETS_FOLDER} does not exist.")
+
     options = ["None"] + pdf_files
 
     # Create two columns
@@ -24,20 +27,19 @@ def create_docs_page():
     # Sidebar: List of PDF names (col1)
     with col1:
         st.write("### Available PDFs")
-        # "None" is pre-selected
         selected_pdf = st.radio("Select a PDF:", options, index=0)
 
     # Display selected PDF in col2
     with col2:
         if selected_pdf != "None":
-            pdf_path = os.path.join(SOURCE_DOCUMNETS_FOLDER, selected_pdf)
+            pdf_path = os.path.join(DESTINATION_DOCUMNETS_FOLDER, selected_pdf)
             with open(pdf_path, "rb") as pdf_file:
                 base64_pdf = base64.b64encode(pdf_file.read()).decode("utf-8")
-            # Display the PDF in an iframe with custom CSS
+
             pdf_display = f'''
             <style>
             .pdf-container {{
-                height: 90vh; /* Adjust based on your needs */
+                height: 90vh;
                 position: relative;
             }}
             .pdf-container iframe {{
@@ -45,7 +47,7 @@ def create_docs_page():
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 97%;
+                height: 100%;
                 border: none;
             }}
             </style>
