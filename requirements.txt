@@ -22,6 +22,7 @@ narwhals==1.5.5
 numpy==2.1.0
 packaging==24.1
 pandas==2.2.2
+pdf2image==1.17.0
 pdfminer.six==20231228
 pdfplumber==0.11.4
 pefile==2023.2.7
@@ -44,6 +45,7 @@ rpds-py==0.20.0
 six==1.16.0
 smmap==5.0.1
 streamlit==1.37.1
+streamlit-pdf-viewer==0.0.18
 tenacity==8.5.0
 toml==0.10.2
 tornado==6.4.1
